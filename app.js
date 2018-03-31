@@ -3,7 +3,10 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 let Book = require('./models/book');    // import the schema from models
-mongoose.connect('mongodb://localhost/test');
+
+mongoose.connect('mongodb://heroku_dk9gqdh0:g44hlper8aju8g6849k2432e7q@ds231229.mlab.com:31229/heroku_dk9gqdh0');
+
+//mongoose.connect('mongodb://localhost/test');
 /******* For Mustache *************/
 mustacheExpress = require('mustache-express');  // Logic-less {{mustache}} templates
 /*********** End mustache *************/
