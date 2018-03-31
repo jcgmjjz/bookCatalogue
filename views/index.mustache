@@ -1,0 +1,160 @@
+<html lang="en">
+  <head>
+    <title>{{name}} BookCatalogue {{name}}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <!--<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
+            <a class="nav-link" href="./">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="./">Book Catalogue</a>
+              <a class="dropdown-item" href="./newBook">Add Book</a>`
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav> 
+    <main role="main" class="container">
+      <div class="starter-template">
+        <h1>B</h1>
+        <h1> </h1>
+        {{#bookstable}}
+        <h1>Book Catalogue</h1>
+        <table class="table">
+        <!-- <table style="width:50%"> -->
+          <thead class="thead-light">
+            <tr>
+              <th>Catalogue ID</th>
+              <th>Title</th>
+              <th>Author</th>
+            </tr>
+          </thead>
+          {{#books}}
+          <tr>
+            <td><a href=./{{_id}}>{{_id}}</a></td>
+            <td>{{title}}</td>
+            <td>{{author}}</td>
+          </tr>
+          {{/books}}
+        </table>
+        <a class="btn btn-primary" href="./newBook" role="button">New Book</a>
+        <p> </p>
+        <p>Select a Book Catalogue ID to View, Remove or Update a Book Entry.</p>
+        <p>Select New Book to Add a book to the catalogue.</p>
+        {{/bookstable}}
+        {{#singlebook}}
+        <h1>Book Query</h1>
+        {{#book}}
+        <table class="table">
+          <tr>
+            <th scope="col">Catalogue ID</th>
+            <td>{{_id}}</td>
+          </tr>
+          <tr>
+            <th scope="col">Title</th>
+            <td>{{title}}</td>
+          </tr>
+          <tr>
+            <th scope="col">Author</th>
+            <td>{{author}}</td>
+          </tr>
+          <tr>
+            <th scope="col">Number of Pages</th>
+            <td>{{numPages}}</td>
+          </tr>
+        </table>
+        <form method='POST' action='./{{_id}}/delete' >
+          <button type="submit" class="btn btn-primary">DELETE BOOK</button>
+        </form>
+        {{/book}}
+        <br />
+        <br />
+        <br />
+        {{#book}}
+        <form method='POST' action='./{{_id}}/update' >
+          <div class="form-group row">
+            <label for="exampleFormControlInput1">Title</label>
+            <div class="col-sm-10">
+              <input type="text" maxlength="80" name="title" class="form-control form-control-sm" placeholder="{{title}}" value="{{title}}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="exampleFormControlInput1">Author</label>
+            <div class="col-sm-10">
+              <input type="text" maxlength="80" class="form-control form-control-sm" placeholder="{{author}}" name="author" value="{{author}}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="exampleFormControlInput1">Number of Pages</label>
+            <div class="col-sm-10">
+              <input type="text" maxlength="20" class="form-control form-control-sm" placeholder="{{numPages}}" name="numPages" value="{{numPages}}"> 
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">UPDATE BOOK</button>
+          <!--<input type="submit" /> -->
+        </form>
+        <br />
+        <br />
+        <form method='GET' action='./' >
+          <button type="submit" class="btn btn-primary">REFRESH</button>
+        </form>
+        {{/book}}
+        {{/singlebook}}
+        {{#newBook}}
+        <h1>Add Book</h1>
+        <form method='POST' action='./new' >
+          <label for="exampleFormControlInput1">Title</label>
+          <div class="col-sm-10">
+            <input type="text" maxlength="80" name="title" class="form-control form-control-sm" placeholder="{{title}}" value="{{title}}">
+          </div>
+          <label for="exampleFormControlInput1">Author</label>
+          <div class="col-sm-10">
+            <input type="text" size="60" maxlength="80" class="form-control form-control-sm" placeholder="{{author}}" name="author" value="{{author}}">
+          </div>
+          <label for="exampleFormControlInput1">Number of Pages</label>
+          <div class="col-sm-10">
+            <input type="text" size="20" class="form-control form-control-sm" placeholder="{{numPages}}" name="numPages" value="{{numPages}}"> 
+          </div>
+          <p> </p>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <form method='GET' action='./' >
+          <button type="submit" class="btn btn-primary">HOME</button>
+        </form>
+        {{/newBook}}
+      </div>
+    </main><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
